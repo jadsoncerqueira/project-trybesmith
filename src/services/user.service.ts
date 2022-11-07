@@ -12,6 +12,11 @@ class UserService {
   public async create(user: User): Promise<void> {
     await this.model.create(user);
   }
+
+  public async login(user: User): Promise<User[]> {
+    const response = await this.model.login(user);
+    return response;
+  }
 }
 
 export default UserService;

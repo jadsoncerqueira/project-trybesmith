@@ -15,6 +15,15 @@ class UserModel {
       [username, classe, level, password],
     );
   }
+
+  public async login(user: User): Promise<User[]> {
+    const response = await this.connection.execute(
+      'SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?',
+      [user.username, user.password],
+    );
+    const [rows] = response;
+    return rows as User[];
+  }
 }
 
 export default UserModel;
