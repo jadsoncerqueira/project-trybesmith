@@ -7,9 +7,12 @@ class UserController {
   constructor(private userService = new UserService()) {}
 
   public create = async (req: Request, res: Response) => {
-    await this.userService.create(req.body);
+    const response = await this.userService.create(req.body);
+    if (response.type) {
+      return res.status(statusCodes.UNPROCESSABLE_ENTITY).json({ message: response.message });
+    }
     const token = createToken(req.body);
-    res.status(statusCodes.CREATED).json({ token });
+    return res.status(statusCodes.CREATED).json({ token });
   };
 
   public login = async (req: Request, res: Response) => {
