@@ -7,7 +7,10 @@ class ProductsController {
 
   public create = async (req: Request, res: Response) => {
     const productCreated = await this.productService.create(req.body);
-    res.status(statusCodes.CREATED).json(productCreated);
+    if (productCreated.type) {
+      return res.status(statusCodes.UNPROCESSABLE_ENTITY).json({ message: productCreated.message });
+    }
+    return res.status(statusCodes.CREATED).json(productCreated.message);
   };
 
   public getAll = async (_req: Request, res: Response) => {
