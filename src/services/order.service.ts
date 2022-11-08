@@ -13,6 +13,11 @@ class OrderService {
     const response = await this.model.getAll();
     return response;
   }
+
+  public async create(arrIds: number[], id: number) {
+    const response = await this.model.create(arrIds, id);
+    return response;
+  }
 }
 
 export default OrderService;

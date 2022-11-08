@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import User from '../interfaces/user.interface';
+import Res from '../interfaces/types.interface';
 
 dotenv.config();
 
@@ -15,13 +16,13 @@ export const createToken = (pay: User): string => {
   return token;
 };
 
-export const validateToken = (token: string): User | string => {
+export const validateToken = (token: string): Res => {
   try {
-    const { data } = jwt.verify(token, secret) as JwtPayload;
-    return data;
+    const { pay } = jwt.verify(token, secret) as JwtPayload;
+    return { type: null, message: pay };
   } catch (error) {
-    const e = new Error('Expired or invalid token');
+    const e = new Error('Invalid token');
     e.name = 'Invalid Token';
-    return e.message;
+    return { type: 'error', message: e.message };
   }
 };
