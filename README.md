@@ -26,7 +26,7 @@ Para executar o projeto, é necessário:
 
 1. Clonar este repositório
   ```
-  git clone https://github.com/tainnaps/trybe-smith.git
+  git clone git@github.com:jadsoncerqueira/project-trybesmith.git
   ```
 2. Instalar as dependências na branch `main`
   ```
